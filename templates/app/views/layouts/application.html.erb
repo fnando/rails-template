@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="<%%= I18n.locale %>">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title><%= app_const %></title>
+    <meta http-equiv="x-dns-prefetch-control" content="off">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%%= csrf_meta_tags %>
+    <%- unless options[:skip_action_cable] -%>
+    <%%= action_cable_meta_tag %>
+    <%- end -%>
+
+    <%- if options[:skip_javascript] -%>
+    <%%= stylesheet_link_tag "application", media: "all" %>
+    <%- else -%>
+      <%- if options[:skip_turbolinks] -%>
+    <%%= stylesheet_link_tag "application", media: "all" %>
+    <%%= javascript_include_tag "application" %>
+      <%- else -%>
+    <%%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => "reload" %>
+    <%%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
+      <%- end -%>
+    <%- end -%>
+  </head>
+
+  <body data-route="application/controllers/<%%= controller.controller_name %>/<%%= controller.action_name %>">
+    <%%= yield %>
+  </body>
+</html>

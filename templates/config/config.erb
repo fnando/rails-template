@@ -1,0 +1,18 @@
+module <%= app_const %>
+  Config = Env::Vars.new do
+  <%- unless skip_active_record? -%>
+    # Set the database connection string.
+    mandatory :database_url, string
+
+  <%- end -%>
+    # Force the request to this particular controller or specified actions to be
+    # under HTTPS protocol.
+    optional :force_ssl, bool, false
+
+    # Set the application environment.
+    optional :rails_env, "development", string, aliases: %w[env]
+
+    # Set the time zone of your application.
+    optional :tz, string, "Etc/UTC"
+  end
+end

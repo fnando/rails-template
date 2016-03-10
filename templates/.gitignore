@@ -1,0 +1,39 @@
+**.orig
+*.gem
+*.rbc
+.rspec
+/.config
+/coverage/
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/InstalledFiles
+/log
+/pkg/
+/public/system
+/spec/examples.txt
+/spec/reports/
+/spec/tmp
+/test/tmp/
+/test/version_tmp/
+/tmp
+/tmp/
+capybara-*.html
+pickle-email-*.html
+rerun.txt
+
+## Environment normalization:
+/.bundle
+/vendor/bundle
+
+# if using bower-rails ignore default bower_components path bower.json files
+/bower_components
+
+# Ignore pow environment settings
+.powenv
+
+# Ignore Byebug command history file.
+.byebug_history
+
+# Ignore other files
+/.env
+/Gemfile.dev

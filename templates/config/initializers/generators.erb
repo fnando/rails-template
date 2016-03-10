@@ -1,0 +1,20 @@
+Rails.env.on(:any) do
+  config.generators do |g|
+    <%- if postgresql? -%>
+    # Use uuid as the primary key type when running PostgreSQL.
+    g.orm :active_record, primary_key_type: :uuid
+
+    <%- end -%>
+    # Disable assets generation per controller/action.
+    g.assets = false
+
+    # Disable stylesheets generation per controller/action.
+    g.stylesheets false
+
+    # Disable javascript generation per controller/action.
+    g.javascripts false
+
+    # Disable fixtures generation.
+    g.test_framework :test_unit, fixture: false
+  end
+end
