@@ -1,0 +1,9 @@
+Rails.env.on(:any) do
+  config.assets.version = "1.0"
+  # config.assets.precompile += %w[]
+  # config.assets.paths << Emoji.images_path
+end
+
+Rails.env.on(:production) do
+  config.action_controller.asset_host = <%= app_const %>::Config.asset_host
+end

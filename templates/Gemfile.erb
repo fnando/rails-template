@@ -24,8 +24,14 @@ gem "sprockets", github: "rails/sprockets", branch: "master"
 gem "babel-transpiler"
 <%- end -%>
 
+group :production do
+  gem "rails_stdout_logging"
+  gem "lograge"
+end
+
 group :development, :test do
   gem "pry-meta", require: false
+  gem "test_squad"
 end
 
 group :test do
@@ -37,6 +43,7 @@ end
 <%- unless skip_javascript? -%>
 source "https://rails-assets.org" do
   gem "rails-assets-almond"
+  gem "rails-assets-qunit"
 end
 
 <%- end -%>

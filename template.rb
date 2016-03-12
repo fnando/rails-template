@@ -2,6 +2,7 @@ require "pathname"
 
 class ::RailsTemplate < Thor::Group
   include Thor::Actions
+  include Rails::Generators::Actions
 
   attr_accessor :options
 
@@ -104,6 +105,21 @@ class ::RailsTemplate < Thor::Group
     copy_file "config/initializers/secure_headers.rb"
   end
 
+  def configure_lograge
+    copy_file "config/initializers/lograge.rb"
+  end
+
+  def configure_assets
+    remove_file "config/initializers/assets.rb"
+    template "config/initializers/assets.erb",
+             "config/initializers/assets.rb"
+  end
+
+  def configure_test_squad
+    run "bundle install"
+    generate "test_squad:install", "--framework", "qunit", "--skip-source"
+  end
+
   private
 
   def edge?
@@ -159,6 +175,6 @@ end
 
 generator = ::RailsTemplate.new
 generator.shell = shell
-generator.options = options.merge(app_name: app_name)
+generator.options = options.merge(app_name: app_name, rails_generator: self)
 generator.destination_root = Dir.pwd
 generator.invoke_all

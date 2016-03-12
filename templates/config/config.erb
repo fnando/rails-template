@@ -14,5 +14,8 @@ module <%= app_const %>
 
     # Set the time zone of your application.
     optional :tz, string, "Etc/UTC"
+
+    # Set the asset host, e.g. AWS CloudFront.
+    optional :asset_host, string
   end
 end
