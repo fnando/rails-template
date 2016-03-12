@@ -80,7 +80,8 @@ class ::RailsTemplate < Thor::Group
   end
 
   def configure_generators
-    template "config/initializers/generators.erb", "config/initializers/generators.rb"
+    template "config/initializers/generators.erb",
+             "config/initializers/generators.rb"
   end
 
   def configure_localization
@@ -97,6 +98,10 @@ class ::RailsTemplate < Thor::Group
     layout_path = "app/views/layouts/application.html.erb"
     remove_file layout_path
     template layout_path, layout_path
+  end
+
+  def configure_secure_headers
+    copy_file "config/initializers/secure_headers.rb"
   end
 
   private
