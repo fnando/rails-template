@@ -16,5 +16,11 @@ Rails.env.on(:any) do
 
     # Disable fixtures generation.
     g.test_framework :test_unit, fixture: false
+
+    # Disable helper generation.
+    g.helper = false
+
+    # Disable route generation.
+    g.skip_routes = true
   end
 end
