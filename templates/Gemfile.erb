@@ -3,9 +3,10 @@ ruby "<%= RUBY_VERSION %>"
 
 gem "rails", "<%= Rails.version %>"
 
-gem "rails-env"
-gem "env_vars"
 gem "dotenv"
+gem "env_vars"
+gem "puma"
+gem "rails-env"
 gem "secure_headers"
 
 <%- unless skip_active_record? -%>
