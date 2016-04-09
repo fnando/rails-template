@@ -12,7 +12,11 @@ gem "secure_headers"
 <%- unless skip_active_record? -%>
 gem "<%= database_adapter %>"
 gem "bcrypt"
-<%- if database_adapter == "pg" -%>gem "ar-uuid"<%- end -%>
+<%- if database_adapter == "pg" -%>
+gem "ar-uuid"
+gem "ar-timestamptz"
+gem "ar-check"
+<%- end -%>
 <%- end -%>
 
 gem "sass-rails", github: "rails/sass-rails", branch: "master"
