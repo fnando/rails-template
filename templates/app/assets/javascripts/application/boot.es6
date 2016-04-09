@@ -40,4 +40,4 @@ function handleError(error) {
 
 $(window)
   .ready(runner)
-  .on("page:load", runner);
+  .on("turbolinks:load", runner);
