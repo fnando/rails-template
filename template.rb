@@ -78,6 +78,7 @@ class ::RailsTemplate < Thor::Group
     remove_file "test/test_helper.rb"
     copy_file "test/test_helper.rb"
     copy_file "test/support/minitest.rb"
+    copy_file "test/support/fixtures.rb"
   end
 
   def configure_generators
