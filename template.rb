@@ -37,10 +37,14 @@ class ::RailsTemplate < Thor::Group
     template "config/routes.erb", "config/routes.rb"
   end
 
+  def copy_assets_manifest
+    copy_file "app/assets/config/manifest.js"
+  end
+
   def configure_javascript
     return if skip_javascript?
 
-    template "config/initializers/babel.erb", "config/initializers/babel.rb"
+    template "package.json.erb", "package.json"
     remove_file "app/assets/javascripts/application.js"
     copy_file "app/assets/javascripts/application.js"
     copy_file "app/assets/javascripts/application/boot.es6"
@@ -116,8 +120,14 @@ class ::RailsTemplate < Thor::Group
              "config/initializers/assets.rb"
   end
 
+  def copy_setup_scripts
+    remove_file "bin/setup"
+    copy_file "bin/setup"
+    copy_file "bin/setup.Darwin"
+    run "chmod +x bin/*"
+  end
+
   def configure_test_squad
-    run "bundle install"
     generate "test_squad:install", "--framework", "qunit", "--skip-source"
   end
 

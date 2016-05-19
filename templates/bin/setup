@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+target=`uname`
+
+source bin/setup.$target
+
+echo
+echo == Installing Ruby dependencies ==
+bundle check || bundle install
+
+echo
+echo == Installing Node dependencies ==
+npm install
+
+echo
+echo == Preparing database ==
+bin/rake db:create db:migrate
+RAILS_ENV=test bin/rake db:create db:migrate

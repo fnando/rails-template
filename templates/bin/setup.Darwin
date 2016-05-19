@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+echo "== Configure Bundler's build option"
+bundle config build.puma --with-opt-dir=/usr/local
+bundle config build.pg --with-opt-dir=/usr/local
+bundle config build.eventmachine --with-opt-dir=/usr/local --with-cppflags=-I/usr/local/opt/openssl/include
+
+echo
+echo "== Install software dependencies"
+brew install postgresql
+brew install nodejs
+brew install redis

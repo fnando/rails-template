@@ -28,6 +28,9 @@ rerun.txt
 # if using bower-rails ignore default bower_components path bower.json files
 /bower_components
 
+# Ignore npm files
+/node_modules
+
 # Ignore pow environment settings
 .powenv
 

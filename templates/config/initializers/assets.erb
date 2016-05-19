@@ -1,7 +1,7 @@
 Rails.env.on(:any) do
   config.assets.version = "1.0"
   # config.assets.precompile += %w[]
-  # config.assets.paths << Emoji.images_path
+  config.assets.paths << Rails.root.join("node_modules").to_s
 end
 
 Rails.env.on(:production) do
