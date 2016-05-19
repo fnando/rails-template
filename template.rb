@@ -13,6 +13,7 @@ class ::RailsTemplate < Thor::Group
   def copy_gemfile
     remove_file "Gemfile"
     template "Gemfile.erb", "Gemfile"
+    copy_file "Gemfile.dev", "Gemfile.dev"
   end
 
   def copy_sample_files
