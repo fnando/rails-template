@@ -129,6 +129,7 @@ class ::RailsTemplate < Thor::Group
   end
 
   def configure_test_squad
+    run "bundle install"
     generate "test_squad:install", "--framework", "qunit", "--skip-source"
   end
 
