@@ -35,6 +35,10 @@ group :production do
   gem "lograge"
 end
 
+group :development do
+  gem "check_files"
+end
+
 group :development, :test do
   gem "pry-meta", require: false
   gem "test_squad"
