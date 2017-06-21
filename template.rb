@@ -30,7 +30,7 @@ class ::RailsTemplate < Thor::Group
   def copy_rc_files
     copy_file ".eslintrc"
     copy_file ".editorconfig"
-    copy_file ".rubocop.yml"
+    template ".rubocop.yml.erb", ".rubocop.yml"
   end
 
   def copy_routes
@@ -183,6 +183,17 @@ class ::RailsTemplate < Thor::Group
     else
       %[postgres:///#{database_name}]
     end
+  end
+
+  def ruby_version
+    {
+      full: RUBY_VERSION,
+      major: RUBY_VERSION[/^(\d+\.\d+)\..*?$/, 1]
+    }
+  end
+
+  def rails_version
+    [Rails::VERSION::MAJOR, Rails::VERSION::MINOR].join(".")
   end
 end
 

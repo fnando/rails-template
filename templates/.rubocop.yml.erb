@@ -1,3 +1,24 @@
+AllCops:
+  TargetRubyVersion: <%= ruby_version %>
+  TargetRailsVersion: <%= rails_version %>
+  Include:
+    - '**/*.gemspec'
+    - '**/*.podspec'
+    - '**/*.jbuilder'
+    - '**/*.rake'
+    - '**/*.opal'
+    - '**/config.ru'
+    - '**/Gemfile'
+    - '**/Rakefile'
+    - '**/Capfile'
+    - '**/Guardfile'
+    - '**/Podfile'
+    - '**/Thorfile'
+    - '**/Vagrantfile'
+    - '**/Berksfile'
+    - '**/Cheffile'
+    - '**/Vagabondfile'
+
 Style/Documentation:
   Enabled: false
 
@@ -33,3 +54,9 @@ Style/PercentLiteralDelimiters:
     '%w': []
     '%W': []
     '%x': []
+
+Metrics/LineLength:
+  Enabled: false
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
