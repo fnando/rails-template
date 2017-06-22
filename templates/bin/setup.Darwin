@@ -10,3 +10,4 @@ echo "== Install software dependencies"
 brew install postgresql
 brew install nodejs
 brew install redis
+brew install yarn

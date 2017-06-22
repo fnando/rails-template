@@ -1,0 +1,2 @@
+web: bundle exec puma --config ./config/puma.rb
+webpack: yarn run js:watch

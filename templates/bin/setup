@@ -5,12 +5,16 @@ target=`uname`
 source bin/setup.$target
 
 echo
+echo == Install Bundler
+gem install bundler
+
+echo
 echo == Installing Ruby dependencies ==
 bundle check || bundle install
 
 echo
-echo == Installing Node dependencies ==
-npm install
+echo == Installing Yarn dependencies ==
+yarn install
 
 echo
 echo == Preparing database ==

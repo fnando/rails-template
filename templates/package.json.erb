@@ -1,14 +1,17 @@
 {
   "name": "<%= options[:app_name] %>",
-  "version": "0.0.0",
   "private": true,
-  "dependencies": {
-    "almond": "^0.3.1",
-    "jquery": "^2.2.3"
+  "scripts": {
+    "js:watch": "webpack --watch --config ./config/webpack/development.js",
+    "js:dist": "webpack --config ./config/webpack/production.js",
+    "js:lint": "eslint --ext .jsx --ext .js app/frontend test/frontend",
+    "js:test": "NODE_ENV=test mocha-webpack --reporter dot --webpack-config config/webpack/test.js 'test/**/*.test.{js,jsx}'"
   },
   "devDependencies": {
-    "qunitjs": "^1.23.0",
-    "sinon": "^1.17.3",
-    "updtr": "^0.1.10"
+    "eslint": "^4.0.0",
+    "mocha": "^3.4.2",
+    "mocha-webpack": "1.0.0-beta.1",
+    "webpack": "2.6.1",
+    "webpack-rails": "https://github.com/fnando/webpack-rails.git"
   }
 }

@@ -16,21 +16,35 @@ class ::RailsTemplate < Thor::Group
     copy_file "Gemfile.dev", "Gemfile.dev"
   end
 
-  def copy_sample_files
-    controller = "app/controllers/pages_controller.rb"
-    copy_file controller, controller
+  def copy_controller_files
+    remove_file "app/controllers/application_controller.rb"
+    directory "app/controllers"
+    remove_file "app/controllers/concerns/.keep"
+  end
 
-    view = "app/views/pages/home.html.erb"
-    copy_file view, view
+  def copy_helper_files
+    copy_file "app/helpers/assets_path_helper.rb"
+  end
 
-    script = "app/assets/javascripts/application/controllers/pages/home.es6"
-    copy_file script, script
+  def setup_assets
+    remove_dir "app/assets"
+    remove_file "package.json"
+
+    return if options[:skip_javascript]
+
+    template "package.json.erb", "package.json"
+    directory "app/frontend"
+    directory "config/webpack"
   end
 
   def copy_rc_files
-    copy_file ".eslintrc"
     copy_file ".editorconfig"
     template ".rubocop.yml.erb", ".rubocop.yml"
+
+    return if options[:skip_javascript]
+
+    copy_file ".eslintrc"
+    copy_file ".eslintrc.development"
   end
 
   def copy_routes
@@ -38,30 +52,11 @@ class ::RailsTemplate < Thor::Group
     template "config/routes.erb", "config/routes.rb"
   end
 
-  def copy_assets_manifest
-    copy_file "app/assets/config/manifest.js"
-  end
-
-  def configure_javascript
-    return if skip_javascript?
-
-    template "package.json.erb", "package.json"
-    remove_file "app/assets/javascripts/application.js"
-    copy_file "app/assets/javascripts/application.js"
-    copy_file "app/assets/javascripts/application/boot.es6"
-    create_file "app/assets/javascripts/application/routes/.keep"
-  end
-
-  def configure_action_cable
-    return if options[:skip_action_cable]
-    file = "app/assets/javascripts/cable.js"
-    copy_file file
-  end
-
   def configure_env
     template ".env.development.erb", ".env.development"
     template ".env.test.erb", ".env.test"
     template "config/config.erb", "config/config.rb"
+    template "asset_host.erb", "config/initializers/asset_host.rb"
     append_file "config/boot.rb", <<-RUBY.strip_heredoc
 
       # Load configuration
@@ -101,10 +96,17 @@ class ::RailsTemplate < Thor::Group
     copy_file ".gitignore"
   end
 
-  def configure_layout
+  def copy_procfile
+    copy_file "Procfile"
+  end
+
+  def copy_view_files
     layout_path = "app/views/layouts/application.html.erb"
     remove_file layout_path
     template layout_path, layout_path
+
+    view = "app/views/pages/home.html.erb"
+    copy_file view, view
   end
 
   def configure_secure_headers
@@ -115,10 +117,8 @@ class ::RailsTemplate < Thor::Group
     copy_file "config/initializers/lograge.rb"
   end
 
-  def configure_assets
+  def remove_assets_initializer
     remove_file "config/initializers/assets.rb"
-    template "config/initializers/assets.erb",
-             "config/initializers/assets.rb"
   end
 
   def copy_setup_scripts
@@ -128,9 +128,10 @@ class ::RailsTemplate < Thor::Group
     run "chmod +x bin/*"
   end
 
-  def configure_test_squad
-    run "bundle install"
-    generate "test_squad:install", "--framework", "qunit", "--skip-source"
+  def install_deps
+    inside(destination_root) do
+      run "./bin/setup"
+    end
   end
 
   private
