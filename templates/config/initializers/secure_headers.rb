@@ -7,7 +7,7 @@ Rails.env.on(:development) do
   end
 end
 
-Rails.env.on(:production) do
+Rails.env.on(:test, :production) do
   SecureHeaders::Configuration.default do |config|
     config.csp[:default_src] = %w['self']
   end
