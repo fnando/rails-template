@@ -4,14 +4,23 @@
   "scripts": {
     "js:watch": "webpack --watch --config ./config/webpack/development.js",
     "js:dist": "webpack --config ./config/webpack/production.js",
-    "js:lint": "eslint --ext .jsx --ext .js app/frontend test/frontend",
-    "js:test": "NODE_ENV=test mocha-webpack --reporter dot --webpack-config config/webpack/test.js 'test/**/*.test.{js,jsx}'"
+    "js:test": "karma start --single-run",
+    "js:test:watch": "karma start"
   },
   "devDependencies": {
-    "eslint": "^4.0.0",
-    "mocha": "^3.4.2",
-    "mocha-webpack": "1.0.0-beta.1",
-    "webpack": "2.6.1",
+    "karma": "1.7.1",
+    "karma-chrome-launcher": "2.2.0",
+    "karma-cli": "^1.0.1",
+    "karma-firefox-launcher": "1.0.1",
+    "karma-qunit": "1.2.1",
+    "karma-safari-launcher": "1.0.0",
+    "karma-webpack": "2.0.4",
+    "qunitjs": "2.4.0",
     "webpack-rails": "https://github.com/fnando/webpack-rails.git"
+  },
+  "dependencies": {
+    <%- unless options[:skip_turbolinks] -%>
+    "turbolinks": "^5.0.3"
+    <%- end -%>
   }
 }

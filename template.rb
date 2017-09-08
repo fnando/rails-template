@@ -33,7 +33,11 @@ class ::RailsTemplate < Thor::Group
     return if options[:skip_javascript]
 
     template "package.json.erb", "package.json"
-    directory "app/frontend"
+    directory "app/frontend/images"
+    directory "app/frontend/scripts"
+    directory "app/frontend/styles"
+    template "app/frontend/application.js.erb", "app/frontend/application.js"
+
     directory "config/webpack"
   end
 
@@ -43,6 +47,8 @@ class ::RailsTemplate < Thor::Group
 
     return if options[:skip_javascript]
 
+    copy_file "karma.conf.js"
+    copy_file ".babelrc"
     copy_file ".eslintrc"
     copy_file ".eslintrc.development"
   end
@@ -132,6 +138,10 @@ class ::RailsTemplate < Thor::Group
     inside(destination_root) do
       run "./bin/setup"
     end
+  end
+
+  def export_assets
+    run "webpack --config ./config/webpack/development.js"
   end
 
   private
