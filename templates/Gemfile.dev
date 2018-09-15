@@ -1,3 +1,0 @@
-group :development, :test do
-  gem "pry-meta", require: false
-end

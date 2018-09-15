@@ -11,7 +11,7 @@ gem "secure_headers"
 
 <%- unless skip_active_record? -%>
 gem "bcrypt"
-gem "<%= database_adapter %>"
+gem "<%= database_adapter %>", "~> 0.18"
 <%- if database_adapter == "pg" -%>
 gem "ar-uuid"
 gem "ar-timestamptz"
@@ -37,7 +37,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
-# You can have your own development dependencies.
-# Just add them to `Gemfile.dev`.
-devfile = "#{__dir__}/Gemfile.dev"
-eval_gemfile(devfile) if File.exist?(devfile)
+group :development, :test do
+  gem "pry-meta", require: false
+end
