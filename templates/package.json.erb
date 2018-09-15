@@ -3,20 +3,10 @@
   "private": true,
   "scripts": {
     "js:watch": "webpack --watch --config ./config/webpack/development.js",
-    "js:dist": "webpack --config ./config/webpack/production.js",
-    "js:test": "karma start --single-run",
-    "js:test:watch": "karma start"
+    "js:dist": "webpack --config ./config/webpack/production.js"
   },
   "devDependencies": {
-    "karma": "1.7.1",
-    "karma-chrome-launcher": "2.2.0",
-    "karma-cli": "^1.0.1",
-    "karma-firefox-launcher": "1.0.1",
-    "karma-qunit": "1.2.1",
-    "karma-safari-launcher": "1.0.0",
-    "karma-webpack": "2.0.4",
-    "qunitjs": "2.4.0",
-    "webpack-rails": "https://github.com/fnando/webpack-rails.git"
+    "webpack-rails": "1.0.x"
   },
   "dependencies": {
     <%- unless options[:skip_turbolinks] -%>

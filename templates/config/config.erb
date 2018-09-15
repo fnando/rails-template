@@ -7,7 +7,7 @@ module <%= app_const %>
   <%- end -%>
     # Force the request to this particular controller or specified actions to be
     # under HTTPS protocol.
-    optional :force_ssl, bool, false
+    optional :force_ssl, bool, true
 
     # Set the application environment.
     optional :rails_env, "development", string, aliases: %w[env]

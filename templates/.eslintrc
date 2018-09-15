@@ -1,13 +1,25 @@
 {
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   "root": true,
+  "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module"
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "es6": true
   },
   "globals": {
   },
+  "settings": {
+    "react": {
+      "version": "16"
+    }
+  },
+  "plugins": ["react"],
   "rules": {
     "array-bracket-spacing": [2, "never"],
     "arrow-body-style": [2, "as-needed"],

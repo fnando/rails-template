@@ -46,7 +46,6 @@ class ::RailsTemplate < Thor::Group
 
     return if options[:skip_javascript]
 
-    copy_file "karma.conf.js"
     copy_file ".babelrc"
     copy_file ".eslintrc"
     copy_file ".eslintrc.development"
@@ -114,10 +113,6 @@ class ::RailsTemplate < Thor::Group
     copy_file view, view
   end
 
-  def configure_secure_headers
-    copy_file "config/initializers/secure_headers.rb"
-  end
-
   def configure_lograge
     copy_file "config/initializers/lograge.rb"
   end
@@ -126,10 +121,11 @@ class ::RailsTemplate < Thor::Group
     remove_file "config/initializers/assets.rb"
   end
 
-  def copy_setup_scripts
+  def copy_bin_scripts
     remove_file "bin/setup"
     copy_file "bin/setup"
     copy_file "bin/setup.Darwin"
+    copy_file "bin/start-dev"
     run "chmod +x bin/*"
   end
 
@@ -159,6 +155,10 @@ class ::RailsTemplate < Thor::Group
 
   def skip_test_unit?
     options[:skip_test_unit]
+  end
+
+  def skip_bootsnap?
+    options[:skip_bootsnap]
   end
 
   def postgresql?

@@ -4,10 +4,12 @@ ruby "<%= RUBY_VERSION %>"
 gem "rails", "<%= Rails.version %>"
 
 gem "dotenv"
+<%- unless skip_bootsnap? -%>
+gem "bootsnap"
+<%- end -%>
 gem "env_vars"
 gem "puma"
 gem "rails-env"
-gem "secure_headers"
 
 <%- unless skip_active_record? -%>
 gem "bcrypt"
