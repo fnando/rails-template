@@ -69,6 +69,20 @@ class ::RailsTemplate < Thor::Group
     RUBY
   end
 
+  def configure_ssl
+    append_file "config/puma.rb", <<-RUBY.strip_heredoc
+
+      if @options[:environment] == "development"
+        ssl_bind "127.0.0.1", ENV.fetch("PORT", 3000), {
+          key: "config/ssl/localhost.key",
+          cert: "config/ssl/localhost.crt"
+        }
+      end
+    RUBY
+
+    directory "config/ssl"
+  end
+
   def configure_database
     return if skip_active_record?
 
