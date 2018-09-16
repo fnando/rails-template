@@ -32,6 +32,7 @@ class ::RailsTemplate < Thor::Group
     return if options[:skip_javascript]
 
     template "package.json.erb", "package.json"
+    copy_file "lib/tasks/assets.rake"
     directory "app/frontend/images"
     directory "app/frontend/scripts"
     directory "app/frontend/styles"

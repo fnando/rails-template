@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "js:watch": "webpack --watch --config ./config/webpack/development.js",
-    "js:dist": "webpack --config ./config/webpack/production.js"
+    "js:dist": "webpack --config ./config/webpack/production.js",
+    "heroku-postbuild": "yarn run js:dist"
   },
   "devDependencies": {
     "webpack-rails": "1.0.x"
