@@ -3,6 +3,13 @@
 module Assets
   MANIFEST_PATH = Rails.root.join("public/dist/manifest.json")
 
+  extend ActiveSupport::Concern
+  include ActionView::Helpers::AssetUrlHelper
+
+  included do
+    helper_method :path_to_asset
+  end
+
   private
 
   def path_to_asset(source, options = {})
@@ -19,7 +26,7 @@ module Assets
       source = "#{source}#{extname}"
     end
 
-    source = File.join("/assets", manifest.fetch(source))
+    source = File.join("/", manifest.fetch(source))
 
     if (host = compute_asset_host(source, options))
       source = File.join(host, source)
