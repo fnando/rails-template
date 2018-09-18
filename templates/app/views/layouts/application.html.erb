@@ -10,20 +10,11 @@
     <%%= action_cable_meta_tag %>
     <%- end -%>
 
-    <%- if options[:skip_javascript] -%>
-    <%%= stylesheet_link_tag "application", media: "all" %>
-    <%- else -%>
-      <%- if options[:skip_turbolinks] -%>
     <%%= stylesheet_link_tag "application", media: "all" %>
     <%%= javascript_include_tag "application" %>
-      <%- else -%>
-    <%%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => "reload" %>
-    <%%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
-      <%- end -%>
-    <%- end -%>
   </head>
 
-  <body data-route="application/controllers/<%%= controller.controller_name %>/<%%= controller.action_name %>">
+  <body>
     <%%= yield %>
   </body>
 </html>

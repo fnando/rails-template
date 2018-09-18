@@ -11,6 +11,8 @@ gem "env_vars"
 gem "puma"
 gem "rails-env"
 
+gem "pry-meta", require: false
+
 <%- unless skip_active_record? -%>
 gem "bcrypt"
 gem "<%= database_adapter %>", "~> 0.18"
@@ -32,13 +34,9 @@ group :development do
 end
 
 group :test do
-  gem "capybara"
-  gem "chromedriver-helper"
-  gem "launchy"
-  gem "minitest-utils"
-  gem "selenium-webdriver"
-end
-
-group :development, :test do
-  gem "pry-meta", require: false
+  # gem "capybara"
+  # gem "chromedriver-helper"
+  # gem "launchy"
+  # gem "minitest-utils"
+  # gem "selenium-webdriver"
 end

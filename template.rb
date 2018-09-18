@@ -21,18 +21,13 @@ class ::RailsTemplate < Thor::Group
     remove_file "app/controllers/concerns/.keep"
   end
 
-  def copy_helper_files
-    copy_file "app/helpers/assets_path_helper.rb"
-  end
-
   def setup_assets
     remove_dir "app/assets"
+    remove_dir "lib/assets"
     remove_file "package.json"
-
-    return if options[:skip_javascript]
+    remove_file "config/initializers/assets.rb"
 
     template "package.json.erb", "package.json"
-    copy_file "lib/tasks/assets.rake"
     directory "app/frontend/images"
     directory "app/frontend/scripts"
     directory "app/frontend/styles"
@@ -44,9 +39,6 @@ class ::RailsTemplate < Thor::Group
   def copy_rc_files
     copy_file ".editorconfig"
     template ".rubocop.yml.erb", ".rubocop.yml"
-
-    return if options[:skip_javascript]
-
     copy_file ".babelrc"
     copy_file ".eslintrc"
     copy_file ".eslintrc.development"
@@ -132,10 +124,6 @@ class ::RailsTemplate < Thor::Group
     copy_file "config/initializers/lograge.rb"
   end
 
-  def remove_assets_initializer
-    remove_file "config/initializers/assets.rb"
-  end
-
   def copy_bin_scripts
     remove_file "bin/setup"
     copy_file "bin/setup"
@@ -193,10 +181,6 @@ class ::RailsTemplate < Thor::Group
     }.fetch(options[:database])
   end
 
-  def skip_javascript?
-    options[:skip_javascript]
-  end
-
   def database_url(env)
     database_name = "#{options[:app_name]}_#{env}"
 
@@ -221,6 +205,15 @@ class ::RailsTemplate < Thor::Group
     [Rails::VERSION::MAJOR, Rails::VERSION::MINOR].join(".")
   end
 end
+
+def check_or_die!(config_name, expected, message)
+  return if options[config_name] == expected
+  $stderr << "\n=> ERROR: #{message}\n"
+  exit 1
+end
+
+check_or_die! "skip_javascript", true, "Please provide --skip-javascript (this template uses webpack to handle assets)"
+check_or_die! "skip_sprockets", true, "Please provide --skip-sprockets (this template uses webpack to handle assets)"
 
 generator = ::RailsTemplate.new
 generator.shell = shell

@@ -1,12 +1,2 @@
 import "./styles/application.scss";
-<%- unless options[:skip_turbolinks] -%>
-import Turbolinks from "turbolinks";
-
-Turbolinks.start();
-
-document.addEventListener("turbolinks:load", function() {
-  console.log("page has been loaded", location.href);
-});
-
-<%- end -%>
 console.log("Welcome!");
