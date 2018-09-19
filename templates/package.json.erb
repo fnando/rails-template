@@ -4,6 +4,7 @@
   "scripts": {
     "js:watch": "webpack --watch --config ./config/webpack/development.js",
     "js:dist": "webpack --config ./config/webpack/production.js",
+    "js:lint": "eslint app/frontend --ext .js,.jsx",
     "heroku-postbuild": "yarn run js:dist"
   },
   "devDependencies": {
