@@ -40,3 +40,4 @@ rerun.txt
 # Ignore other files
 /.env
 /Gemfile.dev
+/config/master.key
